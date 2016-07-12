@@ -1,4 +1,4 @@
-<%@page import="requestsresponses.SeccionResponse"%>
+<%@page import="requestsresponses.CursoResponse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <html>
@@ -14,26 +14,21 @@
 <title>Panel de control</title>
 </head>
 <body>
-
-	<h4 class="section-titulo">Gestión de Distritos / Ver Distrito</h4>
-	<form>
+	<h4 class="section-titulo">Gestión de Departamentos / Ver
+		Departamento</h4>
+	<form action="#" method="post">
 		<fieldset disabled="disabled">
 			<div class="row">
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-5">
 					<label for="nombre">Nombre</label> <input type="text"
 						class="form-control" id="nombre" placeholder="Escribir nombre"
 						name="nombre">
 				</div>
-				<div class="form-group col-md-4">
-					<label for="provincia">Provincia</label> <select id="provincia"
-						class="form-control" name="provincia">
+				<div class="form-group col-md-3">
+					<label for="pais">Pais</label> <select id="pais"
+						class="form-control" name="pais">
 						<option value=""></option>
 					</select>
-				</div>
-				<div class="form-group col-md-4">
-					<label for="poblacion">Poblacion</label> <input type="number"
-						class="form-control" id="poblacion"
-						placeholder="Escribir población" name="poblacion">
 				</div>
 			</div>
 			<div>
@@ -43,6 +38,5 @@
 			</div>
 		</fieldset>
 	</form>
-
 </body>
 </html>

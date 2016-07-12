@@ -1,4 +1,4 @@
-<%@page import="requestsresponses.SeccionResponse"%>
+<%@page import="requestsresponses.ProfesorResponse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <html>
@@ -14,8 +14,7 @@
 <title>Panel de control</title>
 </head>
 <body>
-
-	<h4 class="section-titulo">Gestión de Distritos / Ver Distrito</h4>
+	<h4 class="section-titulo">Gestión de Profesores / Ver Profesor</h4>
 	<form>
 		<fieldset disabled="disabled">
 			<div class="row">
@@ -25,15 +24,10 @@
 						name="nombre">
 				</div>
 				<div class="form-group col-md-4">
-					<label for="provincia">Provincia</label> <select id="provincia"
-						class="form-control" name="provincia">
+					<label for="departamento">Departamento</label> <select
+						id="departamento" class="form-control" name="departamento">
 						<option value=""></option>
 					</select>
-				</div>
-				<div class="form-group col-md-4">
-					<label for="poblacion">Poblacion</label> <input type="number"
-						class="form-control" id="poblacion"
-						placeholder="Escribir población" name="poblacion">
 				</div>
 			</div>
 			<div>
@@ -43,6 +37,5 @@
 			</div>
 		</fieldset>
 	</form>
-
 </body>
 </html>

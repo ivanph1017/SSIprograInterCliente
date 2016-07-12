@@ -1,4 +1,4 @@
-<%@page import="requestsresponses.SeccionResponse"%>
+<%@page import="requestsresponses.AlumnoResponse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <html>
@@ -15,25 +15,21 @@
 </head>
 <body>
 
-	<h4 class="section-titulo">Gestión de Distritos / Ver Distrito</h4>
+	<h4 class="section-titulo">Gestión de Paises / Ver Pais</h4>
 	<form>
 		<fieldset disabled="disabled">
 			<div class="row">
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-2" style="">
 					<label for="nombre">Nombre</label> <input type="text"
-						class="form-control" id="nombre" placeholder="Escribir nombre"
-						name="nombre">
+						class="form-control" id="nombre" value="" name="nombre">
 				</div>
-				<div class="form-group col-md-4">
-					<label for="provincia">Provincia</label> <select id="provincia"
-						class="form-control" name="provincia">
-						<option value=""></option>
-					</select>
+				<div class="form-group col-md-4" style="">
+					<label for="poblacion">Población</label> <input type="number"
+						class="form-control" id="poblacion" value="" name="poblacion">
 				</div>
-				<div class="form-group col-md-4">
-					<label for="poblacion">Poblacion</label> <input type="number"
-						class="form-control" id="poblacion"
-						placeholder="Escribir población" name="poblacion">
+				<div class="form-group col-md-4" style="">
+					<label for="pbi">PBI</label> <input type="text"
+						class="form-control" id="pbi" value="" name="pbi">
 				</div>
 			</div>
 			<div>
@@ -43,6 +39,5 @@
 			</div>
 		</fieldset>
 	</form>
-
 </body>
 </html>
