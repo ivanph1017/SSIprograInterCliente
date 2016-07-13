@@ -39,13 +39,14 @@
 			</button>
 		</div>
 	</form>
+	<%List<Departamento> listaDepas=(List<Departamento>)request.getAttribute("departamentosFiltro");
+	if(!(listaDepas.isEmpty())){%>
 	<form class="listaProvinciasFiltroDepartamento" action="listaProvinciasFiltro" method="get">
 		<div class="row">
 			<div class="form-group col-md-4">
 				<label for="departamento">Departamento</label> <select id="departamento"
 					class="form-control" name="departamento">					
-					<%List<Departamento> listaDepas=(List<Departamento>)request.getAttribute("departamentosFiltro");
-						for(Departamento depa : listaDepas){%>
+					<%for(Departamento depa : listaDepas){%>
 					<option value="<%=depa.getId()%>"><%=depa.getNombre() %></option>
 					<%} %>					
 				</select>
@@ -58,6 +59,9 @@
 			</button>
 		</div>
 	</form>
+	<%} 
+	List<Provincia> listaProv=(List<Provincia>)request.getAttribute("provinciasFiltro");
+	if(!(listaProv.isEmpty())){%>
 	<form id="putDistrito">
 		<%Distrito dist=(Distrito)request.getAttribute("distrito"); %>
 		<input type="hidden" name="id" value="<%=dist.getId()%>">
@@ -71,8 +75,7 @@
 			<div class="form-group col-md-4">
 				<label for="provincia">Provincia</label> <select id="provincia"
 					class="form-control" name="provincia">
-					<%List<Provincia> listaProv=(List<Provincia>)request.getAttribute("provinciasFiltro");
-						for(Provincia prov : listaProv){%>
+					<%for(Provincia prov : listaProv){%>
 					<option value="<%=prov.getId()%>"><%=prov.getNombre() %></option>
 					<%} %>
 				</select>
@@ -90,6 +93,7 @@
 			</button>
 		</div>
 	</form>
+	<%} %>
 
 </body>
 </html>
