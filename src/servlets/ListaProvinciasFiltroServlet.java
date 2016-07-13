@@ -16,6 +16,7 @@ import javax.ws.rs.core.GenericType;
 
 import org.glassfish.jersey.client.ClientConfig;
 
+import beans.Distrito;
 import beans.Provincia;
 
 /**
@@ -32,29 +33,39 @@ public class ListaProvinciasFiltroServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    protected WebTarget target(){
+    	ClientConfig config = new ClientConfig();		
+		Client client = ClientBuilder.newClient(config);
+		WebTarget target = client.target(
+				"http://localhost:8080/Grupo5WebServices/rest/");
+		return target;
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id=Integer.parseInt(request.getParameter("departamento"));
-		String action=request.getParameter("action");
-		ClientConfig config = new ClientConfig();		
-		Client client = ClientBuilder.newClient(config);
-		WebTarget target = client.target(
-				"http://localhost:8080/Grupo5WebServices/rest/");
+		String action=request.getParameter("action");		
 		
-		List<Provincia> respuesta = target.path("provincias/listaFiltro").queryParam("idPais", id)
+		List<Provincia> respuesta = target().path("provincias/filtro/lista").queryParam("idDepartamento", id)
 			.request()
 			.accept("application/json")
 			.get(new GenericType<List<Provincia>>(){});
-		if(action.equalsIgnoreCase("registrar")){
-			RequestDispatcher rd=request.getRequestDispatcher("agregarDistrito.jsp");
+		if(action.equalsIgnoreCase("registrarDistrito")){
+			RequestDispatcher rd=request.getRequestDispatcher("postDistrito.jsp");
 			request.setAttribute("provinciasFiltro", respuesta);
 			rd.forward(request, response);
-		}else if(action.equalsIgnoreCase("editar")){
-			RequestDispatcher rd=request.getRequestDispatcher("editarDistrito.jsp");
+		}else if(action.equalsIgnoreCase("editarDistrito")){
+			Integer idDistrito=Integer.parseInt(request.getParameter("idDistrito"));
+			Distrito dist = target().path("distritos").queryParam("id", idDistrito)
+					.request()
+					.accept("application/json")//recibe el json
+					.get(Distrito.class);			
+			RequestDispatcher rd=request.getRequestDispatcher("putDistrito.jsp");
 			request.setAttribute("provinciasFiltro", respuesta);
+			request.setAttribute("distrito", dist);
 			rd.forward(request, response);
 		}
 	}

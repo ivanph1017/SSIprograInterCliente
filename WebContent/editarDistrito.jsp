@@ -19,6 +19,7 @@
 </head>
 <body>
 	<h4 class="section-titulo">Gestión de Distritos / Editar Distrito</h4>
+	<%Distrito dist=(Distrito)request.getAttribute("distrito"); %>
 	<form class="listaDepartamentosFiltroPais" action="listaDepartamentosFiltro" method="get">
 		<div class="row">
 			<div class="form-group col-md-4">
@@ -32,68 +33,20 @@
 				</select>
 			</div>
 		</div>
-		<input type="hidden" value="editar" name="action">
+		<input type="hidden" class="accion" class="accion" value="editarDistrito" name="action">
+		<input type="hidden" value="<%=dist.getId()%>" name="idDistrito">
 		<div>
 			<button type="submit" class="btn btn-success">
 				<span class="glyphicon glyphicon-ok"></span>Siguiente
 			</button>
 		</div>
 	</form>
-	<%List<Departamento> listaDepas=(List<Departamento>)request.getAttribute("departamentosFiltro");
-	if(!(listaDepas.isEmpty())){%>
-	<form class="listaProvinciasFiltroDepartamento" action="listaProvinciasFiltro" method="get">
-		<div class="row">
-			<div class="form-group col-md-4">
-				<label for="departamento">Departamento</label> <select id="departamento"
-					class="form-control" name="departamento">					
-					<%for(Departamento depa : listaDepas){%>
-					<option value="<%=depa.getId()%>"><%=depa.getNombre() %></option>
-					<%} %>					
-				</select>
-			</div>	
-		</div>
-		<input type="hidden" value="editar" name="action">
-		<div>
-			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Siguiente
-			</button>
-		</div>
-	</form>
-	<%} 
-	List<Provincia> listaProv=(List<Provincia>)request.getAttribute("provinciasFiltro");
-	if(!(listaProv.isEmpty())){%>
-	<form id="putDistrito">
-		<%Distrito dist=(Distrito)request.getAttribute("distrito"); %>
-		<input type="hidden" name="id" value="<%=dist.getId()%>">
-		<div class="row">
-		
-			<div class="form-group col-md-2">
-				<label for="nombre">Nombre</label> <input type="text"
-					class="form-control" id="nombre" placeholder="Escribir nombre"
-					name="nombre" value="<%=dist.getNombre()%>">
-			</div>
-			<div class="form-group col-md-4">
-				<label for="provincia">Provincia</label> <select id="provincia"
-					class="form-control" name="provincia">
-					<%for(Provincia prov : listaProv){%>
-					<option value="<%=prov.getId()%>"><%=prov.getNombre() %></option>
-					<%} %>
-				</select>
-			</div>
-			<div class="form-group col-md-4">
-				<label for="poblacion">Poblacion</label> <input type="number"
-					class="form-control" id="poblacion"
-					placeholder="Escribir población" name="poblacion" 
-					value="<%=dist.getPoblacion()%>">
-			</div>
-		</div>
-		<div>
-			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
-			</button>
-		</div>
-	</form>
-	<%} %>
+	<div class="row">
+		<div class="selector col-md-12"></div>
+	</div>
+	<div class="row">
+		<div class="formFinal col-md-12"></div>
+	</div>
 
 </body>
 </html>

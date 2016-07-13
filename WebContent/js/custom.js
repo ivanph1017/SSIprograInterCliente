@@ -298,8 +298,19 @@ $(document).ready(function() {
 			data : formData, // our data object
 			// what type of data do we expect back from the server
 			success : function(data) {
-				$('#seccionBase').html(data);
-				$('#seccionBase div').slideDown(1000);
+				if($('.accion').val()=='editarProvincia'){
+					$('.formFinal').html(data);
+					$('.formFinal div').slideDown(1000);
+				}else if($('.accion').val()=='registrarProvincia'){
+					$('.formFinal').html(data);
+					$('.formFinal div').slideDown(1000);
+				}else if($('.accion').val()=='editarDistrito'){
+					$('.selector').html(data);
+					$('.selector div').slideDown(1000);
+				}else if($('.accion').val()=='registrarDistrito'){
+					$('.selector').html(data);
+					$('.selector div').slideDown(1000);
+				}
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -317,8 +328,8 @@ $(document).ready(function() {
 			data : formData, // our data object
 			// what type of data do we expect back from the server
 			success : function(data) {
-				$('#seccionBase').html(data);
-				$('#seccionBase div').slideDown(1000);
+				$('.formFinal').html(data);
+				$('.formFinal div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page

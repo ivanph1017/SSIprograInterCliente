@@ -19,53 +19,37 @@
 <body>
 	<h4 class="section-titulo">Gestión de Provincias / Editar
 		Provincia</h4>
-	<form class="listaDepartamentosFiltroPais" action="listaDepartamentosFiltro" method="get">
-		<div class="row">			
+	<%
+		Provincia prov = (Provincia) request.getAttribute("provincia");
+	%>
+	<form class="listaDepartamentosFiltroPais"
+		action="listaDepartamentosFiltro" method="get">
+		<div class="row">
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
-					class="form-control" name="pais">					
-					<%List<Pais> lista=(List<Pais>)request.getSession().getAttribute("paises");
-						for(Pais pais : lista){%>					
+					class="form-control" name="pais">
+					<%
+						List<Pais> lista = (List<Pais>) request.getSession().getAttribute("paises");
+						for (Pais pais : lista) {
+					%>
 					<option value="<%=pais.getId()%>">
-					<%=pais.getNombre() %></option>
-					<%} %>					
+						<%=pais.getNombre()%></option>
+					<%
+						}
+					%>
 				</select>
-			</div>			
+			</div>
 		</div>
-		<input type="hidden" value="editar" name="action">
+		<input type="hidden" class="accion" value="editarProvincia" name="action">
+		<input type="hidden" value="<%=prov.getId()%>" name="idProvincia">
 		<div>
 			<button type="submit" class="btn btn-success">
 				<span class="glyphicon glyphicon-ok"></span>Siguiente
 			</button>
 		</div>
 	</form>
-	<%List<Departamento> listaDepas=(List<Departamento>)request.getAttribute("departamentosFiltro");
-	if(!(listaDepas.isEmpty())){%>
-	<form id="putProvincia">
-		<%Provincia prov=(Provincia)request.getAttribute("provincia"); %>
-		<input type="hidden" name="id" value="<%=prov.getId()%>">
-		<div class="row">
-			<div class="form-group col-md-2">
-				<label for="nombre">Nombre</label> <input type="text"
-					class="form-control" id="nombre" placeholder="Escribir nombre"
-					name="nombre" value="<%=prov.getNombre()%>">
-			</div>
-			<div class="form-group col-md-4">
-				<label for="departamento">Departamento</label> <select
-					id="departamento" class="form-control" name="departamento">
-					<%for(Departamento depa : listaDepas){%>
-					<option value="<%=depa.getId()%>"><%=depa.getNombre() %></option>
-					<%} %>
-				</select>
-			</div>
-		</div>
-		<div>
-			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
-			</button>
-		</div>
-	</form>
-	<%} %>
-
+	<div class="row">
+		<div class="formFinal col-md-12"></div>
+	</div>
 </body>
 </html>

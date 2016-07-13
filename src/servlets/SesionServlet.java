@@ -45,7 +45,7 @@ public class SesionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*ClientConfig config = new ClientConfig();		
+		ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target( //direccion de los servicios
 				"http://localhost:8080/Grupo5WebServices/rest/");
@@ -53,9 +53,9 @@ public class SesionServlet extends HttpServlet {
 				.request()
 				.accept("application/json") //un solo metodo del ese servicio (operacion get, post...)
 				.get(new GenericType<List<Pais>>(){});
-		*/
+		
 		RequestDispatcher rd=request.getRequestDispatcher("sesion.jsp");
-		//request.getSession().setAttribute("paises", paises);		
+		request.getSession().setAttribute("paises", paises);		
 		rd.forward(request, response);
 	}
 

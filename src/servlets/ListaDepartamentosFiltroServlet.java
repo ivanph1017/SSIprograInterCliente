@@ -17,6 +17,7 @@ import javax.ws.rs.core.GenericType;
 import org.glassfish.jersey.client.ClientConfig;
 
 import beans.Departamento;
+import beans.Provincia;
 
 /**
  * Servlet implementation class ListaDepartamentosFiltroServlet
@@ -32,29 +33,49 @@ public class ListaDepartamentosFiltroServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    protected WebTarget target(){
+    	ClientConfig config = new ClientConfig();		
+		Client client = ClientBuilder.newClient(config);
+		WebTarget target = client.target(
+				"http://localhost:8080/Grupo5WebServices/rest/");
+		return target;
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id=Integer.parseInt(request.getParameter("pais"));
+		int id=Integer.parseInt(request.getParameter("pais"));		
 		String action=request.getParameter("action");
-		ClientConfig config = new ClientConfig();		
-		Client client = ClientBuilder.newClient(config);
-		WebTarget target = client.target(
-				"http://localhost:8080/Grupo5WebServices/rest/");
 		
-		List<Departamento> respuesta = target.path("departamentos/listaFiltro").queryParam("idPais", id)
+		List<Departamento> respuesta = target().path("departamentos/filtro/lista").queryParam("idPais", id)
 			.request()
 			.accept("application/json")
 			.get(new GenericType<List<Departamento>>(){});
-		if(action.equalsIgnoreCase("registrar")){
-			RequestDispatcher rd=request.getRequestDispatcher("agregarProvincia.jsp");
+		if(action.equalsIgnoreCase("registrarProvincia")){
+			RequestDispatcher rd=request.getRequestDispatcher("postProvincia.jsp");
 			request.setAttribute("departamentosFiltro", respuesta);
 			rd.forward(request, response);
-		}else if(action.equalsIgnoreCase("editar")){
-			RequestDispatcher rd=request.getRequestDispatcher("editarProvincia.jsp");
+		}else if(action.equalsIgnoreCase("editarProvincia")){
+			int idProvincia=Integer.parseInt(request.getParameter("idProvincia"));
+			Provincia prov = target().path("provincias").queryParam("id", idProvincia)
+					.request()
+					.accept("application/json")//recibe el json
+					.get(Provincia.class);
+			RequestDispatcher rd=request.getRequestDispatcher("putProvincia.jsp");
 			request.setAttribute("departamentosFiltro", respuesta);
+			request.setAttribute("provincia", prov);
+			rd.forward(request, response);
+		}else if(action.equalsIgnoreCase("registrarDistrito")){
+			RequestDispatcher rd=request.getRequestDispatcher("selectorDepartamento.jsp");
+			request.setAttribute("departamentosFiltro", respuesta);
+			rd.forward(request, response);
+		}else if(action.equalsIgnoreCase("editarDistrito")){
+			Integer idDistrito=Integer.parseInt(request.getParameter("idDistrito"));			
+			RequestDispatcher rd=request.getRequestDispatcher("selectorDepartamento.jsp");
+			request.setAttribute("departamentosFiltro", respuesta);
+			request.setAttribute("idDistrito", idDistrito);
 			rd.forward(request, response);
 		}
 	}
