@@ -47,7 +47,7 @@ public class ListaDistritosServlet extends HttpServlet {
 			.accept("application/json")
 			.get(new GenericType<List<Distrito>>(){});
 		RequestDispatcher rd=request.getRequestDispatcher("listaDistritos.jsp");
-		request.getSession().setAttribute("distritos", respuesta);
+		request.setAttribute("distritos", respuesta);
 		rd.forward(request, response);
 	}
 

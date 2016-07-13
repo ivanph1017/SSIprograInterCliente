@@ -1,3 +1,5 @@
+<%@page import="beans.Pais"%>
+<%@page import="beans.Departamento"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -17,18 +19,23 @@
 
 	<h4 class="section-titulo">Gestión de Departamentos / Editar
 		Departamento</h4>
+	<%Departamento dpto=(Departamento)request.getAttribute("departamento"); %>
 	<form id="putDepartamento">
 		<input type="hidden" name="id" value="">
 		<div class="row">
 			<div class="form-group col-md-5">
 				<label for="nombre">Nombre</label> <input type="text"
 					class="form-control" id="nombre" placeholder="Escribir nombre"
-					name="nombre">
+					name="nombre" value="<%=dpto.getNombre() %>">
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-3">			
 				<label for="pais">Pais</label> <select id="pais"
 					class="form-control" name="pais">
-					<option value=""></option>
+					<%List<Pais> listaPaises=(List<Pais>) request.getSession().getAttribute("paises"); 
+					for(Pais pais : listaPaises){
+					%>
+					<option value="<%=pais.getId()%>"><%=pais.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 		</div>

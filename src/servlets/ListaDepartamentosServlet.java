@@ -50,7 +50,7 @@ public class ListaDepartamentosServlet extends HttpServlet {
 			.accept("application/json")
 			.get(new GenericType<List<Departamento>>(){});
 		RequestDispatcher rd=request.getRequestDispatcher("listaDepartamentos.jsp");
-		request.getSession().setAttribute("departamentos", respuesta);
+		request.setAttribute("departamentos", respuesta);
 		rd.forward(request, response);
 	}
 

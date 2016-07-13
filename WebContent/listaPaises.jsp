@@ -1,3 +1,4 @@
+<%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -15,8 +16,8 @@
 </head>
 <body>
 	<div id="divDinamico" class="container-fluid">
-		<h4 class="section-titulo">Gestión de Alumnos / Ver Lista de
-			Alumnos</h4>
+		<h4 class="section-titulo">Gestión de Paises / Ver Lista de
+			Paises</h4>
 		<div class="table-responsive">
 			<table class="table table-striped ">
 				<thead>
@@ -27,24 +28,27 @@
 						<th>Acciones</th>
 					</tr>
 				</thead>
-				<tbody>				
+				<tbody>
+				<%List<Pais> listaPaises=(List<Pais>) request.getSession().getAttribute("paises"); 
+				for(Pais pais : listaPaises){%>
 					<tr>
-						<td>Peru</td>						
-						<td>555555 </td>
-						<td>33333333</td>						
-						<td><a class="editarPais" href="#" data-index-number="" data-action="editar"><span
+						<td><%=pais.getNombre() %></td>						
+						<td><%=pais.getPoblacion() %></td>
+						<td><%=pais.getPbi() %></td>						
+						<td><a class="editarPais" href="#" data-index-number="<%=pais.getId() %>" data-action="editar"><span
 								class="glyphicon glyphicon-pencil"></span></a> <a class="verPais"
-							href="#" data-index-number="" data-action="ver"><span class="glyphicon glyphicon-zoom-in"></span></a> <a
-							class="eliminarPais" href="#" data-index-number=""><span
+							href="#" data-index-number="<%=pais.getId() %>" data-action="ver"><span class="glyphicon glyphicon-zoom-in"></span></a> <a
+							class="eliminarPais" href="#" data-index-number="<%=pais.getId()%>"><span
 								class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
+				<%} %>
 				
 				</tbody>
 			</table>
 		</div>
 		<div>
 			<a href="#" role="button"
-				class="btn btn-success btn-agregar agregarAlumno"><span
+				class="btn btn-success btn-agregar agregarPais"><span
 				class="glyphicon glyphicon-plus"></span>Agregar Registro</a>
 		</div>
 

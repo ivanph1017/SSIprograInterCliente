@@ -44,7 +44,7 @@ public class ListaDepartamentosFiltroServlet extends HttpServlet {
 		WebTarget target = client.target(
 				"http://localhost:8080/Grupo5WebServices/rest/");
 		
-		List<Departamento> respuesta = target.path("departamentos/lista").queryParam("idPais", id)
+		List<Departamento> respuesta = target.path("departamentos/listaFiltro").queryParam("idPais", id)
 			.request()
 			.accept("application/json")
 			.get(new GenericType<List<Departamento>>(){});

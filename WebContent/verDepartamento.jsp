@@ -1,3 +1,4 @@
+<%@page import="beans.Departamento"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <html>
@@ -15,26 +16,22 @@
 <body>
 	<h4 class="section-titulo">Gestión de Departamentos / Ver
 		Departamento</h4>
+	<%Departamento dpto=(Departamento)request.getAttribute("departamento"); %>
 	<form action="#" method="post">
 		<fieldset disabled="disabled">
 			<div class="row">
 				<div class="form-group col-md-5">
 					<label for="nombre">Nombre</label> <input type="text"
-						class="form-control" id="nombre" placeholder="Escribir nombre"
-						name="nombre">
+						class="form-control" id="nombre"
+						name="nombre" value="<%=dpto.getNombre() %>">
 				</div>
 				<div class="form-group col-md-3">
 					<label for="pais">Pais</label> <select id="pais"
 						class="form-control" name="pais">
-						<option value=""></option>
+						<option value="<%=dpto.getPais().getId()%>"><%=dpto.getPais().getNombre() %></option>
 					</select>
 				</div>
-			</div>
-			<div>
-				<button type="submit" class="btn btn-success">
-					<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
-				</button>
-			</div>
+			</div>			
 		</fieldset>
 	</form>
 </body>

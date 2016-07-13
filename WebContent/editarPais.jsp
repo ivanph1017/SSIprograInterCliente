@@ -1,3 +1,4 @@
+<%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -15,20 +16,21 @@
 </head>
 <body>
 	<h4 class="section-titulo">Gestión de Paises / Editar Pais</h4>
+	<%Pais pais=(Pais)request.getAttribute("pais"); %>
 	<form id="putPais">
 		<input type="hidden" name="id" value="">
 		<div class="row">
 			<div class="form-group col-md-2" style="">
 				<label for="nombre">Nombre</label> <input type="text"
-					class="form-control" id="nombre" value="" name="nombre">
+					class="form-control" id="nombre" value="<%=pais.getNombre() %>" name="nombre">
 			</div>
 			<div class="form-group col-md-4" style="">
 				<label for="poblacion">Población</label> <input type="number"
-					class="form-control" id="poblacion" value="" name="poblacion">
+					class="form-control" id="poblacion" value="<%=pais.getPoblacion() %>" name="poblacion">
 			</div>
 			<div class="form-group col-md-4" style="">
 				<label for="pbi">PBI</label> <input type="text" class="form-control"
-					id="pbi" value="" name="pbi">
+					id="pbi" value="<%=pais.getPbi() %>" name="pbi">
 			</div>
 		</div>
 		<div>

@@ -1,3 +1,4 @@
+<%@page import="beans.Departamento"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -26,22 +27,26 @@
 							<th>Acciones</th>
 						</tr>
 					</thead>
-					<tbody>					
+					<tbody>
+					<%List<Departamento> lista=(List<Departamento>) request.getAttribute("departamentos"); 
+					for(Departamento dpto : lista){
+					%>		
 						<tr>
-							<td>Amazonas</td>
-							<td>Perú</td>							
-							<td><a class="editarDepartamento" data-index-number="" data-action="editar" href="#"><span
+							<td><%=dpto.getNombre() %></td>
+							<td><%=dpto.getPais().getNombre() %></td>							
+							<td><a class="editarDepartamento" data-index-number="<%=dpto.getId() %>" data-action="editar" href="#"><span
 									class="glyphicon glyphicon-pencil"></span></a> <a class="verDepartamento" data-action="ver"
-								href="#" data-index-number=""><span class="glyphicon glyphicon-zoom-in"></span></a> <a
-								class="eliminarDepartamento" href="#" data-index-number=""><span
+								href="#" data-index-number="<%=dpto.getId() %>"><span class="glyphicon glyphicon-zoom-in"></span></a> <a
+								class="eliminarDepartamento" href="#" data-index-number="<%=dpto.getId() %>"><span
 									class="glyphicon glyphicon-remove"></span></a></td>
-						</tr>					
+						</tr>
+						<%} %>					
 					</tbody>
 				</table>
 			</div>		
 		<div>
 			<a href="#" role="button"
-				class="btn btn-success btn-agregar agregarCurso"><span
+				class="btn btn-success btn-agregar agregarDepartamento"><span
 				class="glyphicon glyphicon-plus"></span>Agregar Registro</a>
 		</div>
 	</div>

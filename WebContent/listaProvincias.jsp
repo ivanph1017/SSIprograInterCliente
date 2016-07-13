@@ -1,3 +1,4 @@
+<%@page import="beans.Provincia"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -27,23 +28,26 @@
 						<th>Acciones</th>
 					</tr>
 				</thead>
-				<tbody>				
+				<tbody>
+				<%List<Provincia> lista=(List<Provincia>) request.getAttribute("provincias");
+				for(Provincia prov : lista){%>				
 					<tr>
-						<td>Bagua</td>
-						<td>Amazonas</td>
-						<td>Perú</td>						
-						<td><a class="editarProvincia" href="#" data-index-number="" data-action="editar"><span
+						<td><%=prov.getNombre() %></td>
+						<td><%=prov.getDepartamento().getNombre() %></td>
+						<td><%=prov.getDepartamento().getPais().getNombre() %></td>						
+						<td><a class="editarProvincia" href="#" data-index-number="<%=prov.getId() %>" data-action="editar"><span
 								class="glyphicon glyphicon-pencil"></span></a> <a class="verProvincia" data-action="ver"
-							href="#" data-index-number=""><span class="glyphicon glyphicon-zoom-in"></span></a> <a
-							class="eliminarProvincia" href="#" data-index-number=""><span
+							href="#" data-index-number="<%=prov.getId() %>"><span class="glyphicon glyphicon-zoom-in"></span></a> <a
+							class="eliminarProvincia" href="#" data-index-number="<%=prov.getId() %>"><span
 								class="glyphicon glyphicon-remove"></span></a></td>
-					</tr>				
+					</tr>	
+				<%} %>			
 				</tbody>
 			</table>
 		</div>
 		<div>
 			<a href="#" role="button"
-				class="btn btn-success btn-agregar agregarProfesor"><span
+				class="btn btn-success btn-agregar agregarProvincia"><span
 				class="glyphicon glyphicon-plus"></span>Agregar Registro</a>
 		</div>
 	</div>

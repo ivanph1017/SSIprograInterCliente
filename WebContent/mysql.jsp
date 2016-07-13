@@ -15,10 +15,12 @@
 <body>
 
 	<h4 class="section-titulo">Formulario para realizar carga masiva a MySQL</h4>
-	<form id="postMySQL" action="mySQL" method="post" enctype="multipart/form-data">	
+	<label>Si las tablas están vacías, es necesario que se inserte la data en el
+	siguiente orden: Pais - Departamento - Provincia - Distrito</label>
+	<form id="postMySQLPaises" action="mySQLPaises" method="post" enctype="multipart/form-data">	
 		<div class="row">
 			<div class="form-group col-md-5" style="">
-				<label for="txt">Archivo plano</label> <input type="file" class="form-control"
+				<label for="txt">Archivo plano de paises</label> <input type="file" class="form-control"
 					id="txt" accept="text/plain" name="txt"
 					required="required">
 			</div>
@@ -27,5 +29,41 @@
 			<span class="glyphicon glyphicon-plus"></span> <span>Subir archivo</span>
 		</button>
 	</form>
+	<form id="postMySQLDepartamentos" action="mySQLDepartamentos" method="post" enctype="multipart/form-data">	
+		<div class="row">
+			<div class="form-group col-md-5" style="">
+				<label for="txt">Archivo plano de departamentos</label> <input type="file" class="form-control"
+					id="txt" accept="text/plain" name="txt"
+					required="required">
+			</div>
+		</div>		
+		<button type="submit" class="btn btn-danger">
+			<span class="glyphicon glyphicon-plus"></span> <span>Subir archivo</span>
+		</button>
+	</form>
+	<form id="postMySQLProvincias" action="mySQLProvincias" method="post" enctype="multipart/form-data">	
+		<div class="row">
+			<div class="form-group col-md-5" style="">
+				<label for="txt">Archivo plano de provincias</label> <input type="file" class="form-control"
+					id="txt" accept="text/plain" name="txt"
+					required="required">
+			</div>
+		</div>		
+		<button type="submit" class="btn btn-danger">
+			<span class="glyphicon glyphicon-plus"></span> <span>Subir archivo</span>
+		</button>
+	</form>
+	<form id="postMySQLDistritos" action="mySQLDistritos" method="post" enctype="multipart/form-data">	
+		<div class="row">
+			<div class="form-group col-md-5" style="">
+				<label for="txt">Archivo plano de distritos</label> <input type="file" class="form-control"
+					id="txt" accept="text/plain" name="txt"
+					required="required">
+			</div>
+		</div>		
+		<button type="submit" class="btn btn-danger">
+			<span class="glyphicon glyphicon-plus"></span> <span>Subir archivo</span>
+		</button>
+	</form>	
 </body>
 </html>

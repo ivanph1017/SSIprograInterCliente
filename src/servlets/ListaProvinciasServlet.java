@@ -47,7 +47,7 @@ public class ListaProvinciasServlet extends HttpServlet {
 			.accept("application/json")
 			.get(new GenericType<List<Provincia>>(){});
 		RequestDispatcher rd=request.getRequestDispatcher("listaProvincias.jsp");
-		request.getSession().setAttribute("provincias", respuesta);
+		request.setAttribute("provincias", respuesta);
 		rd.forward(request, response);
 	}
 

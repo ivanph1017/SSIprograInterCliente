@@ -1,3 +1,4 @@
+<%@page import="beans.Distrito"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -27,22 +28,25 @@
 						<th>Acciones</th>
 					</tr>
 				</thead>
-				<tbody>				
+				<tbody>
+				<%List<Distrito> lista=(List<Distrito>) request.getAttribute("distritos");
+				for(Distrito dist : lista){%>				
 					<tr>
-						<td>Asunción</td>
-						<td>Chachapoyas</td>
-						<td>5555555</td>						
-						<td><a class="editarDistrito" href="#" data-index-number="" data-action="editar"><span
+						<td><%=dist.getNombre() %></td>
+						<td><%=dist.getProvincia().getNombre() %></td>
+						<td><%=dist.getPoblacion() %></td>						
+						<td><a class="editarDistrito" href="#" data-index-number="<%=dist.getId() %>" data-action="editar"><span
 								class="glyphicon glyphicon-pencil"></span></a> <a class="verDistrito"
-							href="#" data-index-number="" data-action="ver"><span class="glyphicon glyphicon-zoom-in"></span></a> <a
-							class="eliminarDistrito" href="#" data-index-number=""><span
+							href="#" data-index-number="<%=dist.getId() %>" data-action="ver"><span class="glyphicon glyphicon-zoom-in"></span></a> <a
+							class="eliminarDistrito" href="#" data-index-number="<%=dist.getId() %>"><span
 								class="glyphicon glyphicon-remove"></span></a></td>
-					</tr>				
+					</tr>
+				<%} %>				
 				</tbody>
 			</table>
 		</div>		
 		<div>
-			<a href="#" role="button" class="btn btn-success agregarSeccion"><span
+			<a href="#" role="button" class="btn btn-success agregarDistrito"><span
 			class="glyphicon glyphicon-plus"></span>Agregar Registro</a>		
 		</div>
 		
