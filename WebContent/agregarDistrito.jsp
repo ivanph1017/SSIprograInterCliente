@@ -1,3 +1,6 @@
+<%@page import="beans.Provincia"%>
+<%@page import="beans.Departamento"%>
+<%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -21,7 +24,11 @@
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
 					class="form-control" name="pais">
-					<option value=""></option>
+					<%List<Pais> lista=(List<Pais>)request.getSession().getAttribute("paises");
+						for(Pais pais : lista){%>					
+					<option value="<%=pais.getId()%>">
+					<%=pais.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 		</div>
@@ -32,13 +39,16 @@
 			</button>
 		</div>
 	</form>
-
+	<%List<Departamento> listaDepas=(List<Departamento>)request.getAttribute("departamentosFiltro");
+	if(!(listaDepas.isEmpty())){%>
 	<form class="listaProvinciasFiltroDepartamento" action="listaProvinciasFiltro" method="get">
 		<div class="row">
 			<div class="form-group col-md-4">
 				<label for="departamento">Departamento</label> <select
 					id="departamento" class="form-control" name="departamento">
-					<option value=""></option>
+					<%for(Departamento depa : listaDepas){%>
+					<option value="<%=depa.getId()%>"><%=depa.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 		</div>
@@ -49,7 +59,10 @@
 			</button>
 		</div>
 	</form>
-
+	<%} 
+	List<Provincia> listaProv=(List<Provincia>)request.getAttribute("provinciasFiltro");
+	if(!(listaProv.isEmpty())){%>
+	
 	<form id="postDistrito" action="distrito" method="post">
 		<div class="row">
 			<div class="form-group col-md-2">
@@ -60,7 +73,9 @@
 			<div class="form-group col-md-4">
 				<label for="provincia">Provincia</label> <select id="provincia"
 					class="form-control" name="provincia">
-					<option value=""></option>
+					<%for(Provincia prov : listaProv){%>
+					<option value="<%=prov.getId()%>"><%=prov.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 			<div class="form-group col-md-4">
@@ -75,6 +90,6 @@
 			</button>
 		</div>
 	</form>
-
+	<%} %>
 </body>
 </html>

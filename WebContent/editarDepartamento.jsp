@@ -21,7 +21,7 @@
 		Departamento</h4>
 	<%Departamento dpto=(Departamento)request.getAttribute("departamento"); %>
 	<form id="putDepartamento">
-		<input type="hidden" name="id" value="">
+		<input type="hidden" name="id" value="<%=dpto.getId()%>">
 		<div class="row">
 			<div class="form-group col-md-5">
 				<label for="nombre">Nombre</label> <input type="text"

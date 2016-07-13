@@ -1,3 +1,7 @@
+<%@page import="beans.Distrito"%>
+<%@page import="beans.Provincia"%>
+<%@page import="beans.Departamento"%>
+<%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -20,7 +24,11 @@
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
 					class="form-control" name="pais">
-					<option value=""></option>
+					<%List<Pais> lista=(List<Pais>)request.getSession().getAttribute("paises");
+						for(Pais pais : lista){%>					
+					<option value="<%=pais.getId()%>">
+					<%=pais.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 		</div>
@@ -36,7 +44,10 @@
 			<div class="form-group col-md-4">
 				<label for="departamento">Departamento</label> <select id="departamento"
 					class="form-control" name="departamento">					
-					<option value=""></option>					
+					<%List<Departamento> listaDepas=(List<Departamento>)request.getAttribute("departamentosFiltro");
+						for(Departamento depa : listaDepas){%>
+					<option value="<%=depa.getId()%>"><%=depa.getNombre() %></option>
+					<%} %>					
 				</select>
 			</div>	
 		</div>
@@ -48,23 +59,29 @@
 		</div>
 	</form>
 	<form id="putDistrito">
-		<input type="hidden" name="id" value="">
+		<%Distrito dist=(Distrito)request.getAttribute("distrito"); %>
+		<input type="hidden" name="id" value="<%=dist.getId()%>">
 		<div class="row">
+		
 			<div class="form-group col-md-2">
 				<label for="nombre">Nombre</label> <input type="text"
 					class="form-control" id="nombre" placeholder="Escribir nombre"
-					name="nombre">
+					name="nombre" value="<%=dist.getNombre()%>">
 			</div>
 			<div class="form-group col-md-4">
 				<label for="provincia">Provincia</label> <select id="provincia"
 					class="form-control" name="provincia">
-					<option value=""></option>
+					<%List<Provincia> listaProv=(List<Provincia>)request.getAttribute("provinciasFiltro");
+						for(Provincia prov : listaProv){%>
+					<option value="<%=prov.getId()%>"><%=prov.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 			<div class="form-group col-md-4">
 				<label for="poblacion">Poblacion</label> <input type="number"
 					class="form-control" id="poblacion"
-					placeholder="Escribir población" name="poblacion">
+					placeholder="Escribir población" name="poblacion" 
+					value="<%=dist.getPoblacion()%>">
 			</div>
 		</div>
 		<div>

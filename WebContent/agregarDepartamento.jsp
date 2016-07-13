@@ -1,3 +1,4 @@
+<%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -26,8 +27,12 @@
 			</div>			
 			<div class="form-group col-md-3">
 				<label for="pais">Pais</label> <select id="pais"
-					class="form-control" name="pais">					
-					<option value=""></option>					
+					class="form-control" name="pais">
+					<%List<Pais> lista=(List<Pais>)request.getSession().getAttribute("paises");
+						for(Pais pais : lista){%>					
+					<option value="<%=pais.getId()%>">
+					<%=pais.getNombre() %></option>
+					<%} %>					
 				</select>
 			</div>
 		</div>

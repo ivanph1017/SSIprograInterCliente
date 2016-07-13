@@ -18,7 +18,7 @@
 	<h4 class="section-titulo">Gestión de Paises / Editar Pais</h4>
 	<%Pais pais=(Pais)request.getAttribute("pais"); %>
 	<form id="putPais">
-		<input type="hidden" name="id" value="">
+		<input type="hidden" name="id" value="<%=pais.getId()%>">
 		<div class="row">
 			<div class="form-group col-md-2" style="">
 				<label for="nombre">Nombre</label> <input type="text"

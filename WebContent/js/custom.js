@@ -84,7 +84,7 @@ $(document).ready(function() {
 	$('.editarDistrito').off('click').on('click', function() {
 		$.ajax({
 			type : 'get',
-			url : 'seccion',
+			url : 'distrito',
 			data : {
 				"id" : $(this).attr('data-index-number'),
 				"action" : $(this).attr('data-action')
@@ -97,7 +97,7 @@ $(document).ready(function() {
 	});
 	$('#listaPaises').off('click').on('click', function() {
 		$.ajax({
-			url : 'listaPaises.jsp',
+			url : 'listaPaises',
 			success : function(data) {
 				$('#seccionBase').html(data);
 				$('#seccionBase div').slideDown(1000);
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	});
 	$('#listaDepartamentos').off('click').on('click', function() {
 		$.ajax({
-			url : 'listaDepartamentos.jsp',
+			url : 'listaDepartamentos',
 			success : function(data) {
 				$('#seccionBase').html(data);
 				$('#seccionBase div').slideDown(1000);
@@ -117,7 +117,7 @@ $(document).ready(function() {
 	});
 	$('#listaProvincias').off('click').on('click', function() {
 		$.ajax({
-			url : 'listaProvincias.jsp',
+			url : 'listaProvincias',
 			success : function(data) {
 				$('#seccionBase').html(data);
 				$('#seccionBase div').slideDown(1000);
@@ -126,7 +126,7 @@ $(document).ready(function() {
 	});
 	$('#listaDistritos').off('click').on('click', function() {
 		$.ajax({
-			url : 'listaDistritos.jsp',
+			url : 'listaDistritos',
 			success : function(data) {
 				$('#seccionBase').html(data);
 				$('#seccionBase div').slideDown(1000);
@@ -196,7 +196,7 @@ $(document).ready(function() {
 	$('.verDistrito').off('click').on('click', function() {
 		$.ajax({
 			type : 'get',
-			url : 'seccion',
+			url : 'distrito',
 			data : {
 				"id" : $(this).attr('data-index-number'),
 				"action" : $(this).attr('data-action')

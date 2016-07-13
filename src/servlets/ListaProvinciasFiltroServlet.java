@@ -50,11 +50,11 @@ public class ListaProvinciasFiltroServlet extends HttpServlet {
 			.get(new GenericType<List<Provincia>>(){});
 		if(action.equalsIgnoreCase("registrar")){
 			RequestDispatcher rd=request.getRequestDispatcher("agregarDistrito.jsp");
-			request.setAttribute("ProvinciaFiltros", respuesta);
+			request.setAttribute("provinciasFiltro", respuesta);
 			rd.forward(request, response);
 		}else if(action.equalsIgnoreCase("editar")){
 			RequestDispatcher rd=request.getRequestDispatcher("editarDistrito.jsp");
-			request.setAttribute("ProvinciaFiltros", respuesta);
+			request.setAttribute("provinciasFiltro", respuesta);
 			rd.forward(request, response);
 		}
 	}
