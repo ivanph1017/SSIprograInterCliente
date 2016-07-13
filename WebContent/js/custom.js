@@ -142,9 +142,36 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$('#cargaMySQL').off('click').on('click', function() {
+	$('#mysqlPais').off('click').on('click', function() {
 		$.ajax({
-			url : 'mysql.jsp',
+			url : 'mysqlPais.jsp',
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		});
+	});
+	$('#mysqlDpto').off('click').on('click', function() {
+		$.ajax({
+			url : 'mysqlDpto.jsp',
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		});
+	});	
+	$('#mysqlProv').off('click').on('click', function() {
+		$.ajax({
+			url : 'mysqlProv.jsp',
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		});
+	});	
+	$('#mysqlDist').off('click').on('click', function() {
+		$.ajax({
+			url : 'mysqlDist.jsp',
 			success : function(data) {
 				$('#seccionBase').html(data);
 				$('#seccionBase div').slideDown(1000);
@@ -335,7 +362,76 @@ $(document).ready(function() {
 		// stop the form from submitting the normal way and refreshing the page
 		event.preventDefault();
 	});
-	$('#postMySQL').off('submit').on('submit', function(event) {
+	$('#postMySQLPaises').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		//var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'POST', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : new FormData($(this)[0]), // our data object
+			// what type of data do we expect back from the server
+			async: false,
+		    cache: false,
+			processData: false, // tell jQuery not to process the data
+		    contentType: false, // tell jQuery not to set contentType		    
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('#postMySQLDepartamentos').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		//var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'POST', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : new FormData($(this)[0]), // our data object
+			// what type of data do we expect back from the server
+			async: false,
+		    cache: false,
+			processData: false, // tell jQuery not to process the data
+		    contentType: false, // tell jQuery not to set contentType		    
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('#postMySQLProvincias').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		//var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'POST', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : new FormData($(this)[0]), // our data object
+			// what type of data do we expect back from the server
+			async: false,
+		    cache: false,
+			processData: false, // tell jQuery not to process the data
+		    contentType: false, // tell jQuery not to set contentType		    
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('#postMySQLDistritos').off('submit').on('submit', function(event) {
 		event.stopPropagation();
 		var direccion = $(this).attr('action');
 		//var formData = $(this).serializeArray();
@@ -496,5 +592,6 @@ $(document).ready(function() {
 				$('#seccionBase div').slideDown(1000);
 			}
 		});
-	});	
+	});
+	
 });

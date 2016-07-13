@@ -69,8 +69,14 @@
 						<ul class="leftbar subheading">
 							<li><a id="cargaMongo" href="#"><h5>>> Carga de documentos
 								en Mongo</h5></a></li>
-							<li><a id="cargaMySQL" href="#"><h5>>> Carga masiva en
-							MySQL</h5></a></li>							
+							<li><a id="mysqlPais" href="#"><h5>>> Carga masiva de Paises en
+							MySQL</h5></a></li>
+							<li><a id="mysqlDpto" href="#"><h5>>> Carga masiva de Departamentos en
+							MySQL</h5></a></li>	
+							<li><a id="mysqlProv" href="#"><h5>>> Carga masiva de Provincias en
+							MySQL</h5></a></li>	
+							<li><a id="mysqlDist" href="#"><h5>>> Carga masiva de Distritos en
+							MySQL</h5></a></li>								
 						</ul></li>
 				</ul>
 			</div>

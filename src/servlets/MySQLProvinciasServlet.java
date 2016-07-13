@@ -63,10 +63,10 @@ public class MySQLProvinciasServlet extends HttpServlet {
 		String sql;
 		if(filePart!=null){
 			inputStream=filePart.getInputStream();
-			scan=new Scanner(inputStream);
+			scan=new Scanner(inputStream);			
 			scan.useDelimiter("/");
 			while(scan.hasNext()){
-				sql=scan.next();
+				sql=scan.next();				
 				respuesta = target().path("provincias/carga")
 						.request()
 						.accept("text/plain") //el cliente acepta un texto plano

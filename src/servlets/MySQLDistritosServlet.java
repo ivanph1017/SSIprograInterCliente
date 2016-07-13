@@ -63,7 +63,7 @@ public class MySQLDistritosServlet extends HttpServlet {
 		String sql;
 		if(filePart!=null){
 			inputStream=filePart.getInputStream();
-			scan=new Scanner(inputStream);
+			scan=new Scanner(inputStream);			
 			scan.useDelimiter("/");
 			while(scan.hasNext()){
 				sql=scan.next();

@@ -66,7 +66,7 @@ public class MySQLDepartamentosServlet extends HttpServlet {
 			scan=new Scanner(inputStream);
 			scan.useDelimiter("/");
 			while(scan.hasNext()){
-				sql=scan.next();
+				sql=scan.next();				
 				respuesta = target().path("departamentos/carga")
 						.request()
 						.accept("text/plain") //el cliente acepta un texto plano
