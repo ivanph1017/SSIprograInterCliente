@@ -32,7 +32,7 @@
 		<div class="col-md-3">
 			<div id="asideBase">
 				<ul class="leftbar">
-					<li><span class="glyphicon glyphicon-briefcase leftheading"></span>
+					<li><span class="glyphicon glyphicon-globe leftheading"></span>
 						<h4 class="leftheading">Gestión de Paises</h4>
 						<ul class="leftbar subheading">
 							<li><a class="agregarPais" href="#"><h5>>>
@@ -40,7 +40,7 @@
 							<li><a id="listaPaises" href="#"><h5>>> Ver
 										Lista de Paises</h5></a></li>
 						</ul></li>
-					<li><span class="glyphicon glyphicon-education leftheading"></span>
+					<li><span class="glyphicon glyphicon-globe leftheading"></span>
 						<h4 class="leftheading">Gestión de Departamentos</h4>
 						<ul class="leftbar subheading">
 							<li><a class="agregarDepartamento" href="#"><h5>>>
@@ -48,7 +48,7 @@
 							<li><a id="listaDepartamentos" href="#"><h5>>> Ver Lista
 										de Departamentos</h5></a></li>
 						</ul></li>
-					<li><span class="glyphicon glyphicon-education leftheading"></span>
+					<li><span class="glyphicon glyphicon-globe leftheading"></span>
 						<h4 class="leftheading">Gestión de Provincias</h4>
 						<ul class="leftbar subheading">
 							<li><a class="agregarProvincia" href="#"><h5>>>
@@ -56,13 +56,21 @@
 							<li><a id="listaProvincias" href="#"><h5>>> Ver Lista
 										de Provincias</h5></a></li>
 						</ul></li>	
-					<li><span class="glyphicon glyphicon-book leftheading"></span>
+					<li><span class="glyphicon glyphicon-globe leftheading"></span>
 						<h4 class="leftheading">Gestión de Distritos</h4>
 						<ul class="leftbar subheading">
 							<li><a class="agregarDistrito" href="#"><h5>>> Agregar
 										Distrito</h5></a></li>
 							<li><a id="listaDistritos" href="#"><h5>>> Ver Lista
 										de Distritos</h5></a></li>							
+						</ul></li>
+					<li><span class="glyphicon glyphicon-open leftheading"></span>
+						<h4 class="leftheading">Gestión de cargas</h4>
+						<ul class="leftbar subheading">
+							<li><a id="cargaMongo" href="#"><h5>>> Carga de documentos
+								en Mongo</h5></a></li>
+							<li><a id="cargaMySQL" href="#"><h5>>> Carga masiva en
+							MySQL</h5></a></li>							
 						</ul></li>
 				</ul>
 			</div>

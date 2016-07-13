@@ -16,26 +16,24 @@ import javax.ws.rs.core.GenericType;
 
 import org.glassfish.jersey.client.ClientConfig;
 
+import beans.Pais;
 
-import requestsresponses.ProfesorResponse;
+
 
 /**
- * Servlet implementation class ListaProfesoresServlet
+ * Servlet implementation class ListaAlumnosServlet
  */
-@WebServlet("/listaProfesores")
-public class ListaProfesoresServlet extends HttpServlet {
+@WebServlet("/listaPaises")
+public class ListaPaisesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListaProfesoresServlet() {
+    public ListaPaisesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-
-    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,14 +44,17 @@ public class ListaProfesoresServlet extends HttpServlet {
 		WebTarget target = client.target(
 				"http://localhost:8080/Grupo5WebServices/rest/");
 		
-		List<ProfesorResponse> respuesta = target.path("profesores/lista")
+		List<Pais> respuesta = target.path("paises/lista")
 			.request()
-			.accept("application/json")
-			.get(new GenericType<List<ProfesorResponse>>(){});
-		RequestDispatcher rd=request.getRequestDispatcher("listaProfesores.jsp");
-		request.getSession().setAttribute("profesores", respuesta);
+			.accept("application/json")//recibe el json
+			.get(new GenericType<List<Pais>>(){}); //convierte en el json en una lista AlumnosResponse
+		RequestDispatcher rd=request.getRequestDispatcher("listaPaises.jsp");
+		request.getSession().setAttribute("paises", respuesta);
 		rd.forward(request, response);
+		
+		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -16,22 +16,20 @@ import javax.ws.rs.client.WebTarget;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-
-
-import requestsresponses.Seccion;
-import requestsresponses.SeccionResponse;
+import beans.Distrito;
+import beans.Provincia;
 
 /**
  * Servlet implementation class SeccionServlet
  */
-@WebServlet("/seccion")
-public class SeccionServlet extends HttpServlet {
+@WebServlet("/distrito")
+public class DistritoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SeccionServlet() {
+    public DistritoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,17 +51,17 @@ public class SeccionServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String action=request.getParameter("action");	
 		
-		SeccionResponse respuesta = target().path("secciones").queryParam("id", id)
+		Distrito respuesta = target().path("distritos").queryParam("id", id)
 				.request()
 				.accept("application/json")//recibe el json
-				.get(SeccionResponse.class);
+				.get(Distrito.class);
 		if(action.equals("ver")){
-			RequestDispatcher rd=request.getRequestDispatcher("verSeccion.jsp");
-			request.setAttribute("seccion", respuesta);		
+			RequestDispatcher rd=request.getRequestDispatcher("verDistrito.jsp");
+			request.setAttribute("distrito", respuesta);		
 			rd.forward(request, response);
 		}else if(action.equals("editar")){
-			RequestDispatcher rd=request.getRequestDispatcher("editarSeccion.jsp");
-			request.setAttribute("seccion", respuesta);		
+			RequestDispatcher rd=request.getRequestDispatcher("editarDistrito.jsp");
+			request.setAttribute("distrito", respuesta);		
 			rd.forward(request, response);
 		}		
 	}
@@ -72,17 +70,22 @@ public class SeccionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int codigo = Integer.parseInt(request.getParameter("codigo"));
-		int id_curso = Integer.parseInt(request.getParameter("curso"));						
-		int id_profesor = Integer.parseInt(request.getParameter("profesor"));
+		String nombre=request.getParameter("nombre");
+		int idProvincia=Integer.parseInt(request.getParameter("provincia"));
+		int poblacion=Integer.parseInt(request.getParameter("poblacion"));
 		
-		Seccion seccion=new Seccion(0, codigo, id_curso, id_profesor);
+		Provincia provincia = target().path("provincias").queryParam("id", idProvincia)
+				.request()
+				.accept("application/json")//recibe el json
+				.get(Provincia.class);
 		
-		String respuesta = target().path("secciones")
+		Distrito distrito = new Distrito(0, nombre, poblacion, provincia);
+		
+		String respuesta = target().path("distritos")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
 				.post(
-						Entity.json(seccion),
+						Entity.json(distrito),
 						String.class//Cadena que devuelve un texto plano
 						);
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");

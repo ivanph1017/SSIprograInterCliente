@@ -1,4 +1,3 @@
-<%@page import="requestsresponses.Estudio"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -17,18 +16,19 @@
 <body>
 	<h4 class="section-titulo">Gestión de Provincias / Agregar
 		Provincia</h4>
-	<form id="listaDepartamentos" action="departamento" method="get">
-		<div class="row">			
+	<form class="listaDepartamentosFiltroPais" action="listaDepartamentosFiltro" method="get">
+		<div class="row">
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
-					class="form-control" name="pais">					
-					<option value=""></option>					
+					class="form-control" name="pais">
+					<option value=""></option>
 				</select>
-			</div>			
+			</div>
 		</div>
+		<input type="hidden" value="registrar" name="action">
 		<div>
 			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
+				<span class="glyphicon glyphicon-ok"></span>Siguiente
 			</button>
 		</div>
 	</form>
@@ -40,11 +40,11 @@
 					name="nombre">
 			</div>
 			<div class="form-group col-md-4">
-				<label for="departamento">Departamento</label> <select id="departamento"
-					class="form-control" name="departamento">					
-					<option value=""></option>					
+				<label for="departamento">Departamento</label> <select
+					id="departamento" class="form-control" name="departamento">
+					<option value=""></option>
 				</select>
-			</div>						
+			</div>
 		</div>
 		<div>
 			<button type="submit" class="btn btn-success">

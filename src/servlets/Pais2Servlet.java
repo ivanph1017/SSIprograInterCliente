@@ -15,19 +15,19 @@ import javax.ws.rs.client.WebTarget;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import requestsresponses.Alumno;
+import beans.Pais;
 
 /**
  * Servlet implementation class Alumno2Servlet
  */
-@WebServlet("/alumno2")
-public class Alumno2Servlet extends HttpServlet {
+@WebServlet("/pais2")
+public class Pais2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Alumno2Servlet() {
+    public Pais2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +45,7 @@ public class Alumno2Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		String respuesta = target().path("alumnos").queryParam("id", id)
+		String respuesta = target().path("paises").queryParam("id", id)
 				.request()
 				.accept("text/plain")//recibe texto plano
 				.delete(String.class);
@@ -58,23 +58,19 @@ public class Alumno2Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id=Integer.parseInt(request.getParameter("id"));
-		String nombres = request.getParameter("nombre");
-		String apellido_paterno = request.getParameter("apellidop");
-		String apellido_materno= request.getParameter("apellidom");
-		String dni = request.getParameter("dni");
-		String foto_url = request.getParameter("urlfoto");
-		int codigo = Integer.parseInt(request.getParameter("codigo"));
-		int id_colegio = Integer.parseInt(request.getParameter("colegio"));
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nombre = request.getParameter("nombre");
+		int poblacion=Integer.parseInt(request.getParameter("poblacion"));
+		float pbi=Float.parseFloat(request.getParameter("pbi"));		
 		
-		Alumno alumno = new Alumno(id, nombres, apellido_paterno, apellido_materno, dni, foto_url, codigo, id_colegio);
+		Pais pais=new Pais(id, nombre, poblacion, pbi);
 		
 			
-		String respuesta = target().path("alumnos")
+		String respuesta = target().path("paises")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
 				.put(
-						Entity.json(alumno),
+						Entity.json(pais),
 						String.class//Cadena que devuelve un texto plano
 						);		
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");

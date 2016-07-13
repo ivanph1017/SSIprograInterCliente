@@ -1,6 +1,4 @@
-<%@page import="requestsresponses.Colegio"%>
 <%@page import="java.util.List"%>
-<%@page import="requestsresponses.AlumnoResponse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <html>
@@ -18,6 +16,7 @@
 <body>
 	<h4 class="section-titulo">Gestión de Paises / Editar Pais</h4>
 	<form id="putPais">
+		<input type="hidden" name="id" value="">
 		<div class="row">
 			<div class="form-group col-md-2" style="">
 				<label for="nombre">Nombre</label> <input type="text"

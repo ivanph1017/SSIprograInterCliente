@@ -1,5 +1,3 @@
-<%@page import="requestsresponses.ProfesorResponse"%>
-<%@page import="requestsresponses.CursoResponse"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -17,7 +15,8 @@
 </head>
 <body>
 	<h4 class="section-titulo">Gestión de Distritos / Agregar Distrito</h4>
-	<form id="listaDepartamentos" action="departamento" method="get">
+
+	<form class="listaDepartamentosFiltroPais" action="listaDepartamentosFiltro" method="get">
 		<div class="row">
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
@@ -26,27 +25,31 @@
 				</select>
 			</div>
 		</div>
+		<input type="hidden" value="registrar" name="action">
 		<div>
 			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
+				<span class="glyphicon glyphicon-ok"></span>Siguiente
 			</button>
 		</div>
 	</form>
-	<form id="listaProvincias" action="provincia" method="get">
+
+	<form class="listaProvinciasFiltroDepartamento" action="listaProvinciasFiltro" method="get">
 		<div class="row">
 			<div class="form-group col-md-4">
-				<label for="departamento">Departamento</label> <select id="departamento"
-					class="form-control" name="departamento">					
-					<option value=""></option>					
+				<label for="departamento">Departamento</label> <select
+					id="departamento" class="form-control" name="departamento">
+					<option value=""></option>
 				</select>
-			</div>	
+			</div>
 		</div>
+		<input type="hidden" value="registrar" name="action">
 		<div>
 			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
+				<span class="glyphicon glyphicon-ok"></span>Siguiente
 			</button>
 		</div>
 	</form>
+
 	<form id="postDistrito" action="distrito" method="post">
 		<div class="row">
 			<div class="form-group col-md-2">

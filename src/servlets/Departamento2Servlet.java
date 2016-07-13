@@ -15,19 +15,20 @@ import javax.ws.rs.client.WebTarget;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import requestsresponses.Seccion;
+import beans.Departamento;
+import beans.Pais;
 
 /**
- * Servlet implementation class Seccion2Servlet
+ * Servlet implementation class Profesor2Servlet
  */
-@WebServlet("/seccion2")
-public class Seccion2Servlet extends HttpServlet {
+@WebServlet("/departamento2")
+public class Departamento2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Seccion2Servlet() {
+    public Departamento2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,14 +40,13 @@ public class Seccion2Servlet extends HttpServlet {
 				"http://localhost:8080/Grupo5WebServices/rest/");
 		return target;
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		String respuesta = target().path("secciones").queryParam("id", id)
+		String respuesta = target().path("departamentos").queryParam("id", id)
 				.request()
 				.accept("text/plain")//recibe texto plano
 				.delete(String.class);
@@ -59,20 +59,25 @@ public class Seccion2Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id= Integer.parseInt(request.getParameter("id"));
-		int codigo = Integer.parseInt(request.getParameter("codigo"));
-		int id_curso = Integer.parseInt(request.getParameter("curso"));						
-		int id_profesor = Integer.parseInt(request.getParameter("profesor"));
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nombre = request.getParameter("nombre");
+		int idPais=Integer.parseInt(request.getParameter("pais"));
 		
-		Seccion seccion=new Seccion(id, codigo, id_curso, id_profesor);
+		Pais pais = target().path("paises").queryParam("id", idPais)
+				.request()
+				.accept("application/json")//recibe el json
+				.get(Pais.class);
 		
-		String respuesta = target().path("secciones")
+		
+		Departamento depa=new Departamento(id, nombre, pais);	
+		
+		String respuesta = target().path("departamentos")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
 				.put(
-						Entity.json(seccion),
+						Entity.json(depa),
 						String.class//Cadena que devuelve un texto plano
-						);
+						);		
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");
 		request.setAttribute("msg", respuesta);		
 		rd.forward(request, response);

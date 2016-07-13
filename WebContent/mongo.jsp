@@ -14,30 +14,21 @@
 <title>Panel de control</title>
 </head>
 <body>
-
-	<h4 class="section-titulo">Gestión de Departamentos / Editar
-		Departamento</h4>
-	<form id="putDepartamento">
-		<input type="hidden" name="id" value="">
-		<div class="row">
-			<div class="form-group col-md-5">
-				<label for="nombre">Nombre</label> <input type="text"
-					class="form-control" id="nombre" placeholder="Escribir nombre"
-					name="nombre">
-			</div>
-			<div class="form-group col-md-3">
-				<label for="pais">Pais</label> <select id="pais"
+	<h4 class="section-titulo">Formulario para realizar carga a Mongo</h4>
+	<form id="postMongo" action="mongo" method="post">
+		<div class="row">			
+			<div class="form-group col-md-4">
+				<label for="pais">País</label> <select id="pais"
 					class="form-control" name="pais">
 					<option value=""></option>
 				</select>
 			</div>
-		</div>
+		</div>		
 		<div>
 			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
+				<span class="glyphicon glyphicon-ok"></span>Subir archivos
 			</button>
 		</div>
 	</form>
-
 </body>
 </html>

@@ -15,20 +15,20 @@ import javax.ws.rs.client.WebTarget;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import requestsresponses.Alumno;
-import requestsresponses.Profesor;
+import beans.Distrito;
+import beans.Provincia;
 
 /**
- * Servlet implementation class Profesor2Servlet
+ * Servlet implementation class Seccion2Servlet
  */
-@WebServlet("/profesor2")
-public class Profesor2Servlet extends HttpServlet {
+@WebServlet("/distrito2")
+public class Distrito2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Profesor2Servlet() {
+    public Distrito2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,13 +40,14 @@ public class Profesor2Servlet extends HttpServlet {
 				"http://localhost:8080/Grupo5WebServices/rest/");
 		return target;
     }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		String respuesta = target().path("profesores").queryParam("id", id)
+		String respuesta = target().path("distritos").queryParam("id", id)
 				.request()
 				.accept("text/plain")//recibe texto plano
 				.delete(String.class);
@@ -59,25 +60,25 @@ public class Profesor2Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id=Integer.parseInt(request.getParameter("id"));
-		String nombres = request.getParameter("nombre");
-		String apellido_paterno = request.getParameter("apellidop");
-		String apellido_materno= request.getParameter("apellidom");
-		String dni = request.getParameter("dni");
-		String foto_url = request.getParameter("urlfoto");
-		int id_estudio = Integer.parseInt(request.getParameter("idEstudio"));
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nombre=request.getParameter("nombre");
+		int idProvincia=Integer.parseInt(request.getParameter("provincia"));
+		int poblacion=Integer.parseInt(request.getParameter("poblacion"));
 		
+		Provincia provincia = target().path("provincias").queryParam("id", idProvincia)
+				.request()
+				.accept("application/json")//recibe el json
+				.get(Provincia.class);
 		
-		Profesor profesor = new Profesor(id, nombres, apellido_paterno, apellido_materno, dni, foto_url, id_estudio);
+		Distrito distrito = new Distrito(id, nombre, poblacion, provincia);
 		
-			
-		String respuesta = target().path("profesores")
+		String respuesta = target().path("distritos")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
 				.put(
-						Entity.json(profesor),
+						Entity.json(distrito),
 						String.class//Cadena que devuelve un texto plano
-						);		
+						);
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");
 		request.setAttribute("msg", respuesta);		
 		rd.forward(request, response);

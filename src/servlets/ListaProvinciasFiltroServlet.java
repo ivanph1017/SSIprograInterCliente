@@ -16,20 +16,19 @@ import javax.ws.rs.core.GenericType;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-
-import requestsresponses.CursoResponse;
+import beans.Provincia;
 
 /**
- * Servlet implementation class ListaCursosServlet
+ * Servlet implementation class ListaProvinciasFiltroServlet
  */
-@WebServlet("/listaCursos")
-public class ListaCursosServlet extends HttpServlet {
+@WebServlet("/listaProvinciasFiltro")
+public class ListaProvinciasFiltroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListaCursosServlet() {
+    public ListaProvinciasFiltroServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,26 +37,34 @@ public class ListaCursosServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id=Integer.parseInt(request.getParameter("departamento"));
+		String action=request.getParameter("action");
 		ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target(
 				"http://localhost:8080/Grupo5WebServices/rest/");
 		
-		List<CursoResponse> respuesta = target.path("cursos/lista")
+		List<Provincia> respuesta = target.path("provincias/lista").queryParam("idPais", id)
 			.request()
 			.accept("application/json")
-			.get(new GenericType<List<CursoResponse>>(){});
-		RequestDispatcher rd=request.getRequestDispatcher("listaCursos.jsp");
-		request.getSession().setAttribute("cursos", respuesta);
-		rd.forward(request, response);
+			.get(new GenericType<List<Provincia>>(){});
+		if(action.equalsIgnoreCase("registrar")){
+			RequestDispatcher rd=request.getRequestDispatcher("agregarDistrito.jsp");
+			request.setAttribute("ProvinciaFiltros", respuesta);
+			rd.forward(request, response);
+		}else if(action.equalsIgnoreCase("editar")){
+			RequestDispatcher rd=request.getRequestDispatcher("editarDistrito.jsp");
+			request.setAttribute("ProvinciaFiltros", respuesta);
+			rd.forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+
 	}
 
 }

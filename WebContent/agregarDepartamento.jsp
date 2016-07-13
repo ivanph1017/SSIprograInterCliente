@@ -1,4 +1,3 @@
-<%@page import="requestsresponses.Escuela"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>

@@ -1,6 +1,4 @@
-<%@page import="requestsresponses.Estudio"%>
 <%@page import="java.util.List"%>
-<%@page import="requestsresponses.ProfesorResponse"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <html>
@@ -18,7 +16,7 @@
 <body>
 	<h4 class="section-titulo">Gestión de Provincias / Editar
 		Provincia</h4>
-	<form id="listaDepartamentos" action="departamento" method="get">
+	<form class="listaDepartamentosFiltroPais" action="listaDepartamentosFiltro" method="get">
 		<div class="row">			
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
@@ -27,13 +25,15 @@
 				</select>
 			</div>			
 		</div>
+		<input type="hidden" value="editar" name="action">
 		<div>
 			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Guardar Cambios
+				<span class="glyphicon glyphicon-ok"></span>Siguiente
 			</button>
 		</div>
 	</form>
 	<form id="putProvincia">
+		<input type="hidden" name="id" value="">
 		<div class="row">
 			<div class="form-group col-md-2">
 				<label for="nombre">Nombre</label> <input type="text"

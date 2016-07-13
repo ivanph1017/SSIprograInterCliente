@@ -18,7 +18,7 @@
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
 							<center> <img id="logo" src="img/logo.png" /></center>
-							<form action="sesion" method="get">
+							<form action="sesion" method="post">
 							<div class="form-group">
 								<label for="username">Usuario</label> <input type="email"
 									class="form-control" id="username" name="username"

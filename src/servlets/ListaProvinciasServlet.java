@@ -16,20 +16,19 @@ import javax.ws.rs.core.GenericType;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import requestsresponses.CursoResponse;
-import requestsresponses.SeccionResponse;
+import beans.Provincia;
 
 /**
- * Servlet implementation class ListaSeccionesServlet
+ * Servlet implementation class ListaCursosServlet
  */
-@WebServlet("/listaSecciones")
-public class ListaSeccionesServlet extends HttpServlet {
+@WebServlet("/listaProvincias")
+public class ListaProvinciasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListaSeccionesServlet() {
+    public ListaProvinciasServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,12 +42,12 @@ public class ListaSeccionesServlet extends HttpServlet {
 		WebTarget target = client.target(
 				"http://localhost:8080/Grupo5WebServices/rest/");
 		
-		List<SeccionResponse> respuesta = target.path("secciones/lista")
+		List<Provincia> respuesta = target.path("provincias/lista")
 			.request()
 			.accept("application/json")
-			.get(new GenericType<List<SeccionResponse>>(){});
-		RequestDispatcher rd=request.getRequestDispatcher("listaSecciones.jsp");
-		request.getSession().setAttribute("secciones", respuesta);
+			.get(new GenericType<List<Provincia>>(){});
+		RequestDispatcher rd=request.getRequestDispatcher("listaProvincias.jsp");
+		request.getSession().setAttribute("provincias", respuesta);
 		rd.forward(request, response);
 	}
 

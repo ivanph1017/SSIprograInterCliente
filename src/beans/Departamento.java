@@ -1,35 +1,46 @@
-package requestsresponses;
+package beans;
 
-public class Estudio {
+
+public class Departamento {
+	
 	private int id;
 	private String nombre;
-	private String mencion;
-	public Estudio() {
+	private Pais pais;
+
+	public Departamento() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public Estudio(int id, String nombre, String mencion) {
+
+	public Departamento(int id, String nombre, Pais pais) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.mencion = mencion;
+		this.pais = pais;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getMencion() {
-		return mencion;
+
+	public Pais getPais() {
+		return pais;
 	}
-	public void setMencion(String mencion) {
-		this.mencion = mencion;
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 	
 	

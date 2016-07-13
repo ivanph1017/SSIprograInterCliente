@@ -2,54 +2,6 @@
  * 
  */
 $(document).ready(function() {
-	$('#gestionAcademica').off('click').on('click', function() {
-		$.ajax({
-			url : 'gestionAcademica.jsp',
-			success : function(data) {
-				$('#asideBase').html(data);
-				$('#aside div').slideDown(1000);
-			}
-		});
-		$.ajax({
-			url : 'blank.jsp',
-			success : function(data) {
-				$('#seccionBase').html(data);
-				$('#seccion div').slideDown(1000);
-			}
-		});
-	});
-	$('#gestionEventos').off('click').on('click', function() {
-		$.ajax({
-			url : 'gestionEventos.jsp',
-			success : function(data) {
-				$('#asideBase').html(data);
-				$('#aside div').slideDown(1000);
-			}
-		});
-		$.ajax({
-			url : 'blank.jsp',
-			success : function(data) {
-				$('#seccionBase').html(data);
-				$('#seccion div').slideDown(1000);
-			}
-		});
-	});
-	$('#gestionContable').off('click').on('click', function() {
-		$.ajax({
-			url : 'gestionContable.jsp',
-			success : function(data) {
-				$('#asideBase').html(data);
-				$('#aside div').slideDown(1000);
-			}
-		});
-		$.ajax({
-			url : 'blank.jsp',
-			success : function(data) {
-				$('#seccionBase').html(data);
-				$('#seccion div').slideDown(1000);
-			}
-		});
-	});
 	$('.agregarProvincia').off('click').on('click', function() {
 		$.ajax({
 			url : 'agregarProvincia.jsp',
@@ -181,6 +133,24 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$('#cargaMongo').off('click').on('click', function() {
+		$.ajax({
+			url : 'mongo.jsp',
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		});
+	});
+	$('#cargaMySQL').off('click').on('click', function() {
+		$.ajax({
+			url : 'mysql.jsp',
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		});
+	});	
 	$('.verPais').off('click').on('click', function() {
 		$.ajax({
 			type : 'get',
@@ -249,8 +219,8 @@ $(document).ready(function() {
 			data : formData, // our data object
 			// what type of data do we expect back from the server
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -269,8 +239,8 @@ $(document).ready(function() {
 			data : formData, // our data object
 			// what type of data do we expect back from the server
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -289,8 +259,8 @@ $(document).ready(function() {
 			data : formData, // our data object
 			// what type of data do we expect back from the server
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -309,8 +279,92 @@ $(document).ready(function() {
 			data : formData, // our data object
 			// what type of data do we expect back from the server
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('.listaDepartamentosFiltroPais').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'get', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : formData, // our data object
+			// what type of data do we expect back from the server
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('.listaProvinciasFiltroDepartamento').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'get', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : formData, // our data object
+			// what type of data do we expect back from the server
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('#postMySQL').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		//var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'POST', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : new FormData($(this)[0]), // our data object
+			// what type of data do we expect back from the server
+			async: false,
+		    cache: false,
+			processData: false, // tell jQuery not to process the data
+		    contentType: false, // tell jQuery not to set contentType		    
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
+			}
+		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
+	});
+	$('#postMongo').off('submit').on('submit', function(event) {
+		event.stopPropagation();
+		var direccion = $(this).attr('action');
+		//var formData = $(this).serializeArray();
+		// process the form
+		$.ajax({
+			type : 'POST', // define the type of HTTP verb we want to use (POST
+			// for our form)
+			url : direccion, // the url where we want to POST
+			data : new FormData($(this)[0]), // our data object
+			// what type of data do we expect back from the server
+			async: false,
+		    cache: false,
+			processData: false, // tell jQuery not to process the data
+		    contentType: false, // tell jQuery not to set contentType		    
+			success : function(data) {
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -325,8 +379,8 @@ $(document).ready(function() {
 			url : 'pais2', // the url where we want to put
 			data : formData, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -341,8 +395,8 @@ $(document).ready(function() {
 			url : 'departamento2', // the url where we want to put
 			data : formData, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -357,8 +411,8 @@ $(document).ready(function() {
 			url : 'provincia2', // the url where we want to put
 			data : formData, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -373,8 +427,8 @@ $(document).ready(function() {
 			url : 'distrito2', // the url where we want to put
 			data : formData, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		})
 		// stop the form from submitting the normal way and refreshing the page
@@ -388,8 +442,8 @@ $(document).ready(function() {
 				"id" : $(this).attr('data-index-number')
 			}, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		});
 	});
@@ -401,8 +455,8 @@ $(document).ready(function() {
 				"id" : $(this).attr('data-index-number')
 			}, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		});
 	});
@@ -414,8 +468,8 @@ $(document).ready(function() {
 				"id" : $(this).attr('data-index-number')
 			}, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		});
 	});
@@ -427,8 +481,8 @@ $(document).ready(function() {
 				"id" : $(this).attr('data-index-number')
 			}, // our data object
 			success : function(data) {
-				$('#divDinamico').html(data);
-				$('#divDinamico div').slideDown(1000);
+				$('#seccionBase').html(data);
+				$('#seccionBase div').slideDown(1000);
 			}
 		});
 	});	

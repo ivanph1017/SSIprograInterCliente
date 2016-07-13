@@ -16,20 +16,19 @@ import javax.ws.rs.core.GenericType;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import beans.Pais;
-;
+import beans.Distrito;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ListaSeccionesServlet
  */
-@WebServlet("/sesion")
-public class SesionServlet extends HttpServlet {
+@WebServlet("/listaDistritos")
+public class ListaDistritosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SesionServlet() {
+    public ListaDistritosServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,26 +36,27 @@ public class SesionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ClientConfig config = new ClientConfig();		
+		Client client = ClientBuilder.newClient(config);
+		WebTarget target = client.target(
+				"http://localhost:8080/Grupo5WebServices/rest/");
 		
+		List<Distrito> respuesta = target.path("distritos/lista")
+			.request()
+			.accept("application/json")
+			.get(new GenericType<List<Distrito>>(){});
+		RequestDispatcher rd=request.getRequestDispatcher("listaDistritos.jsp");
+		request.getSession().setAttribute("distritos", respuesta);
+		rd.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*ClientConfig config = new ClientConfig();		
-		Client client = ClientBuilder.newClient(config);
-		WebTarget target = client.target( //direccion de los servicios
-				"http://localhost:8080/Grupo5WebServices/rest/");
-		List<Pais> paises = target.path("paises/lista") //direccion de un solo servicio
-				.request()
-				.accept("application/json") //un solo metodo del ese servicio (operacion get, post...)
-				.get(new GenericType<List<Pais>>(){});
-		*/
-		RequestDispatcher rd=request.getRequestDispatcher("sesion.jsp");
-		//request.getSession().setAttribute("paises", paises);		
-		rd.forward(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

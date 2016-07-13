@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,27 +17,27 @@ import javax.ws.rs.client.WebTarget;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import com.owlike.genson.Genson;
 
-import requestsresponses.Alumno;
-import requestsresponses.AlumnoResponse;
+import beans.Departamento;
+import beans.Provincia;
+
 
 /**
- * Servlet implementation class AlumnoServlet
+ * Servlet implementation class CursoServlet
  */
-@WebServlet("/alumno")
-public class AlumnoServlet extends HttpServlet {
+@WebServlet("/provincia")
+public class ProvinciaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlumnoServlet() {
+    public ProvinciaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    protected WebTarget target(){
+
+	protected WebTarget target(){
     	ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target(
@@ -50,44 +50,45 @@ public class AlumnoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String action=request.getParameter("action");		
+		String action=request.getParameter("action");	
 		
-		
-		AlumnoResponse respuesta = target().path("alumnos").queryParam("id", id)
+		Provincia respuesta = target().path("provincias").queryParam("id", id)
 				.request()
 				.accept("application/json")//recibe el json
-				.get(AlumnoResponse.class);
+				.get(Provincia.class);
 		if(action.equals("ver")){
-			RequestDispatcher rd=request.getRequestDispatcher("verAlumno.jsp");
-			request.setAttribute("alumno", respuesta);		
+			RequestDispatcher rd=request.getRequestDispatcher("verProvincia.jsp");
+			request.setAttribute("provincia", respuesta);		
 			rd.forward(request, response);
 		}else if(action.equals("editar")){
-			RequestDispatcher rd=request.getRequestDispatcher("editarAlumno.jsp");
-			request.setAttribute("alumno", respuesta);		
+			RequestDispatcher rd=request.getRequestDispatcher("editarProvincia.jsp");
+			request.setAttribute("provincia", respuesta);		
 			rd.forward(request, response);
-		}				
-	}
+		}
+					
+				
+	}	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombres = request.getParameter("nombre");
-		String apellido_paterno = request.getParameter("apellidop");
-		String apellido_materno= request.getParameter("apellidom");
-		String dni = request.getParameter("dni");
-		String foto_url = request.getParameter("urlfoto");
-		int codigo = Integer.parseInt(request.getParameter("codigo"));
-		int id_colegio = Integer.parseInt(request.getParameter("colegio"));
+		String nombre = request.getParameter("nombre");
+		int idDepa = Integer.parseInt(request.getParameter("departamento"));				
 		
-		Alumno alumno = new Alumno(0, nombres, apellido_paterno, apellido_materno, dni, foto_url, codigo, id_colegio);
+		Departamento depa = target().path("departamentos").queryParam("id", idDepa)
+				.request()
+				.accept("application/json")//recibe el json
+				.get(Departamento.class);
 		
-			
-		String respuesta = target().path("alumnos")
+		Provincia provincia = new Provincia(0, nombre, depa);
+		
+		String respuesta = target().path("provincias")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
 				.post(
-						Entity.json(alumno),
+						Entity.json(provincia),
 						String.class//Cadena que devuelve un texto plano
 						);		
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");
@@ -99,7 +100,6 @@ public class AlumnoServlet extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
 		
 	}
 
@@ -107,7 +107,7 @@ public class AlumnoServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 	}
 
 }

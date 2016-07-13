@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,32 +13,27 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 
-
 import org.glassfish.jersey.client.ClientConfig;
 
-import com.owlike.genson.Genson;
-
-import requestsresponses.Alumno;
-import requestsresponses.Curso;
-import requestsresponses.CursoResponse;
-
+import beans.Departamento;
+import beans.Provincia;
 
 /**
- * Servlet implementation class CursoServlet
+ * Servlet implementation class Curso2Servlet
  */
-@WebServlet("/curso")
-public class CursoServlet extends HttpServlet {
+@WebServlet("/provincia2")
+public class Provincia2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CursoServlet() {
+    public Provincia2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	protected WebTarget target(){
+    
+    protected WebTarget target(){
     	ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target(
@@ -52,60 +46,41 @@ public class CursoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String action=request.getParameter("action");	
 		
-		CursoResponse respuesta = target().path("cursos").queryParam("id", id)
+		String respuesta = target().path("provincias").queryParam("id", id)
 				.request()
-				.accept("application/json")//recibe el json
-				.get(CursoResponse.class);
-		if(action.equals("ver")){
-			RequestDispatcher rd=request.getRequestDispatcher("verCurso.jsp");
-			request.setAttribute("curso", respuesta);		
-			rd.forward(request, response);
-		}else if(action.equals("editar")){
-			RequestDispatcher rd=request.getRequestDispatcher("editarCurso.jsp");
-			request.setAttribute("curso", respuesta);		
-			rd.forward(request, response);
-		}
-					
-				
-	}	
-	
+				.accept("text/plain")//recibe texto plano
+				.delete(String.class);
+		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");
+		request.setAttribute("msg", respuesta);
+		rd.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
 		String nombre = request.getParameter("nombre");
-		int codigo = Integer.parseInt(request.getParameter("codigo"));				
-		int id_escuela = Integer.parseInt(request.getParameter("carrera"));
+		int idDepa = Integer.parseInt(request.getParameter("departamento"));				
 		
-		Curso curso=new Curso(0, nombre, codigo, id_escuela);
+		Departamento depa = target().path("departamentos").queryParam("id", idDepa)
+				.request()
+				.accept("application/json")//recibe el json
+				.get(Departamento.class);
 		
-		String respuesta = target().path("cursos")
+		Provincia provincia = new Provincia(id, nombre, depa);
+		
+		String respuesta = target().path("provincias")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
-				.post(
-						Entity.json(curso),
+				.put(
+						Entity.json(provincia),
 						String.class//Cadena que devuelve un texto plano
 						);		
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");
 		request.setAttribute("msg", respuesta);		
 		rd.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 
 }

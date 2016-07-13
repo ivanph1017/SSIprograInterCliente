@@ -14,31 +14,28 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 
+
 import org.glassfish.jersey.client.ClientConfig;
 
-import com.owlike.genson.Genson;
+import beans.Pais;
 
-
-import requestsresponses.Profesor;
-import requestsresponses.ProfesorResponse;
 
 /**
- * Servlet implementation class ProfesorServlet
+ * Servlet implementation class AlumnoServlet
  */
-@WebServlet("/profesor")
-public class ProfesorServlet extends HttpServlet {
+@WebServlet("/pais")
+public class PaisServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfesorServlet() {
+    public PaisServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     
-
-	protected WebTarget target(){
+    protected WebTarget target(){
     	ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target(
@@ -50,46 +47,41 @@ public class ProfesorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int id = Integer.parseInt(request.getParameter("id"));
 		String action=request.getParameter("action");		
 		
 		
-		ProfesorResponse respuesta = target().path("profesores").queryParam("id", id)
+		Pais respuesta = target().path("paises").queryParam("id", id)
 				.request()
 				.accept("application/json")//recibe el json
-				.get(ProfesorResponse.class);
+				.get(Pais.class);
 		if(action.equals("ver")){
-			RequestDispatcher rd=request.getRequestDispatcher("verProfesor.jsp");
-			request.setAttribute("profesor", respuesta);		
+			RequestDispatcher rd=request.getRequestDispatcher("verPais.jsp");
+			request.setAttribute("pais", respuesta);		
 			rd.forward(request, response);
 		}else if(action.equals("editar")){
-			RequestDispatcher rd=request.getRequestDispatcher("editarProfesor.jsp");
-			request.setAttribute("profesor", respuesta);		
+			RequestDispatcher rd=request.getRequestDispatcher("editarPais.jsp");
+			request.setAttribute("pais", respuesta);		
 			rd.forward(request, response);
-		}			
+		}				
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombres = request.getParameter("nombre");
-		String apellido_paterno = request.getParameter("apellidop");
-		String apellido_materno= request.getParameter("apellidom");
-		String dni = request.getParameter("dni");
-		String foto_url = request.getParameter("urlfoto");		
-		int id_estudio = Integer.parseInt(request.getParameter("estudio"));
+		String nombre = request.getParameter("nombre");
+		int poblacion=Integer.parseInt(request.getParameter("poblacion"));
+		float pbi=Float.parseFloat(request.getParameter("pbi"));		
 		
-		Profesor profe=new Profesor(0, nombres, apellido_paterno, apellido_materno, dni, foto_url, id_estudio);
+		Pais pais=new Pais(0, nombre, poblacion, pbi);
 		
-		
-		
-		String respuesta = target().path("profesores")
+			
+		String respuesta = target().path("paises")
 				.request()
 				.accept("text/plain") //el cliente acepta un texto plano
 				.post(
-						Entity.json(profe),
+						Entity.json(pais),
 						String.class//Cadena que devuelve un texto plano
 						);		
 		RequestDispatcher rd=request.getRequestDispatcher("confirmar.jsp");
@@ -101,6 +93,7 @@ public class ProfesorServlet extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				
 		
 	}
 
@@ -108,7 +101,7 @@ public class ProfesorServlet extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 }
