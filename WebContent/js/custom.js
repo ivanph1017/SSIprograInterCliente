@@ -470,6 +470,8 @@ $(document).ready(function() {
 				$('#seccionBase div').slideDown(1000);
 			}
 		})
+		// stop the form from submitting the normal way and refreshing the page
+		event.preventDefault();
 	});
 	$('#putPais').off('submit').on('submit', function(event) {
 		event.stopPropagation();
