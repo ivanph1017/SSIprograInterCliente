@@ -42,7 +42,7 @@ public class ListaPaisesServlet extends HttpServlet {
 		ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target(
-				"http://localhost:8080/Grupo5WebServices/rest/");
+				"http://localhost:8080/SergioSandraIvanWebServices/rest/");
 		
 		List<Pais> respuesta = target.path("paises/lista")
 			.request()

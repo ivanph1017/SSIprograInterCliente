@@ -40,7 +40,7 @@ public class MySQLPaisesServlet extends HttpServlet {
     	ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target(
-				"http://localhost:8080/Grupo5WebServices/rest/");
+				"http://localhost:8080/SergioSandraIvanWebServices/rest/");
 		return target;
     }
 

@@ -48,7 +48,7 @@ public class SesionServlet extends HttpServlet {
 		ClientConfig config = new ClientConfig();		
 		Client client = ClientBuilder.newClient(config);
 		WebTarget target = client.target( //direccion de los servicios
-				"http://localhost:8080/Grupo5WebServices/rest/");
+				"http://localhost:8080/SergioSandraIvanWebServices/rest/");
 		List<Pais> paises = target.path("paises/lista") //direccion de un solo servicio
 				.request()
 				.accept("application/json") //un solo metodo del ese servicio (operacion get, post...)
