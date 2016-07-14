@@ -1,3 +1,4 @@
+<%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -15,18 +16,23 @@
 </head>
 <body>
 	<h4 class="section-titulo">Formulario para realizar carga a Mongo</h4>
-	<form id="postMongo" action="mongo" method="post">
+	<label>Para realizar la carga debe haber datos en la base de datos en ClearDB</label>	
+	<form id="postMongo" action="mongo" method="get">
 		<div class="row">			
 			<div class="form-group col-md-4">
 				<label for="pais">País</label> <select id="pais"
 					class="form-control" name="pais">
-					<option value=""></option>
+					<%List<Pais> lista=(List<Pais>)request.getSession().getAttribute("paises"); 
+					for(Pais pais : lista){
+					%>
+					<option value="<%=pais.getId()%>"><%=pais.getNombre() %></option>
+					<%} %>
 				</select>
 			</div>
 		</div>		
 		<div>
 			<button type="submit" class="btn btn-success">
-				<span class="glyphicon glyphicon-ok"></span>Subir archivos
+				<span class="glyphicon glyphicon-ok"></span>Cargar documentos JSON
 			</button>
 		</div>
 	</form>

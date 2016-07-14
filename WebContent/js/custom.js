@@ -457,25 +457,19 @@ $(document).ready(function() {
 	$('#postMongo').off('submit').on('submit', function(event) {
 		event.stopPropagation();
 		var direccion = $(this).attr('action');
-		//var formData = $(this).serializeArray();
+		var formData = $(this).serializeArray();
 		// process the form
 		$.ajax({
-			type : 'POST', // define the type of HTTP verb we want to use (POST
+			type : 'get', // define the type of HTTP verb we want to use (POST
 			// for our form)
 			url : direccion, // the url where we want to POST
-			data : new FormData($(this)[0]), // our data object
+			data : formData, // our data object
 			// what type of data do we expect back from the server
-			async: false,
-		    cache: false,
-			processData: false, // tell jQuery not to process the data
-		    contentType: false, // tell jQuery not to set contentType		    
 			success : function(data) {
 				$('#seccionBase').html(data);
 				$('#seccionBase div').slideDown(1000);
 			}
 		})
-		// stop the form from submitting the normal way and refreshing the page
-		event.preventDefault();
 	});
 	$('#putPais').off('submit').on('submit', function(event) {
 		event.stopPropagation();
